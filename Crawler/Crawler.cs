@@ -18,6 +18,7 @@ namespace Crawler
 
                 var websiteUrl = args[0];
 
+                //regex na URL'e mógłby być lepszy
                 Regex regexUrl = new Regex(@"(http|https)\:\/{2}[a-zA-Z0-9_.+-]+\.[a-zA-Z0-9\-]+");
 
                 if (!regexUrl.IsMatch(websiteUrl))                
@@ -34,6 +35,7 @@ namespace Crawler
 
                 httpClient.Dispose();
 
+                //regex na maile mógłby być lepszy
                 Regex regex = new Regex(@"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+");
 
                 MatchCollection matchCollection = regex.Matches(content);
@@ -45,7 +47,9 @@ namespace Crawler
 
                 foreach (var item in matchCollection)
                 {
-                    set.Add(item.ToString());
+                    string toAdd = item.ToString();
+                    if (!set.Contains(toAdd))
+                        set.Add(toAdd);
                 }
 
                 foreach (var item in set)
