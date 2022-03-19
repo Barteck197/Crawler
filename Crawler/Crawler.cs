@@ -38,6 +38,9 @@ namespace Crawler
 
                 MatchCollection matchCollection = regex.Matches(content);
 
+                if (matchCollection.Count == 0)
+                    throw new EmptyCollectionException();
+
                 var set = new HashSet<string>();
 
                 foreach (var item in matchCollection)
@@ -62,6 +65,10 @@ namespace Crawler
             {
                 Console.WriteLine("Błąd w czasie pobierania strony.");
             }
+            catch (EmptyCollectionException ece)
+            {
+                Console.WriteLine("Nie znaleziono adresów email.");
+            }
 
 
 
@@ -77,5 +84,10 @@ namespace Crawler
 
             //Console.WriteLine(content);
         }
+    }
+
+    class EmptyCollectionException : Exception
+    {
+        public EmptyCollectionException() { }
     }
 }
