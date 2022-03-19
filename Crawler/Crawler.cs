@@ -32,6 +32,8 @@ namespace Crawler
 
                 var content = await response.Content.ReadAsStringAsync();
 
+                httpClient.Dispose();
+
                 Regex regex = new Regex(@"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+");
 
                 MatchCollection matchCollection = regex.Matches(content);
