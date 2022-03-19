@@ -58,6 +58,10 @@ namespace Crawler
             {
                 Console.WriteLine(ae.Message);
             }
+            catch (HttpRequestException hre)
+            {
+                Console.WriteLine("Błąd w czasie pobierania strony.");
+            }
 
 
 
