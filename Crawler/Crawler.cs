@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Crawler
 {
@@ -17,9 +18,9 @@ namespace Crawler
 
                 var websiteUrl = args[0];
 
-                Regex regexUrl = new Regex(@"http[s]");
+                Regex regexUrl = new Regex(@"(http|https)\:\/{2}[a-zA-Z0-9_.+-]+\.[a-zA-Z0-9\-]+");
 
-                if (websiteUrl == "")
+                if (!regexUrl.IsMatch(websiteUrl))                
                     throw new ArgumentException();
 
                 var httpClient = new HttpClient();
